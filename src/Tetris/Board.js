@@ -24,9 +24,22 @@ export class Board extends Graphics {
 
 		for (let i = 0; i < blocksCount; i++) {
 			const scheme = schemes[randomInt(0, schemes.length - 1)];
+			const blockWidth = scheme[0].length;
+			const blockHeight = scheme.length;
+			let offsetX = randomInt(0, this.#columnsLength - 1);
+			let offsetY = randomInt(0, this.#rowsLength - 1);
+
+			if (offsetX + blockWidth > this.#columnsLength) {
+				offsetX = this.#columnsLength - blockWidth;
+			}
+
+			if (offsetY + blockHeight > this.#rowsLength) {
+				offsetY = this.#rowsLength - blockHeight;
+			}
+
 			const block = new Block({
-				offsetX: randomInt(0, this.#columnsLength - 1),
-				offsetY: randomInt(0, this.#rowsLength - 1),
+				offsetX,
+				offsetY,
 				tileLength: this.#tileLength,
 				scheme,
 			});

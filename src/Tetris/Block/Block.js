@@ -1,4 +1,5 @@
 import { Graphics } from 'pixi.js';
+import { DropShadowFilter } from 'pixi-filters';
 
 import { randomHexColor } from '@/utils/randomHexColor';
 import { Tile } from './Tile';
@@ -30,6 +31,14 @@ export class Block extends Graphics {
 				}
 			}
 		}
+
+		const dropShadowFilter = new DropShadowFilter({
+			color: 0x000000,
+			blur: 2,
+			offsetX: 0,
+		});
+
+		this.filters = [dropShadowFilter];
 	}
 
 	get left() {
