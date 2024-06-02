@@ -1,10 +1,10 @@
-import { Graphics } from 'pixi.js';
+import { Container, Graphics } from 'pixi.js';
 import { DropShadowFilter } from 'pixi-filters';
 
 import { randomHexColor } from '@/utils/randomHexColor';
 import { Tile } from './Tile';
 
-export class Block extends Graphics {
+export class Block extends Container {
 	#tileLength = 0;
 	#offsetX = 0;
 	#offsetY = 0;

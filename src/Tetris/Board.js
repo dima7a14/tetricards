@@ -1,21 +1,25 @@
-import { Graphics } from 'pixi.js';
+import { Container, Graphics } from 'pixi.js';
 
 import { randomInt } from '@/utils/randomInt';
 import { Block } from './Block';
 import { schemes } from './schemes';
 
-export class Board extends Graphics {
+export class Board extends Container {
 	#columnsLength = 10;
 	#rowsLength = 0;
 	#tileLength = 0;
+	#width = 0;
+	#height = 0;
+	#bg = new Graphics();
 
 	constructor({ width, height }) {
 		super();
-		this.roundRect(0, 0, width, height, 8).fill(0xededed).stroke({
-			color: 0x303030,
-			width: 2,
-			alignment: 0,
-		});
+
+		this.#width = width;
+		this.#height = height;
+
+		this.#drawBackground();
+		this.addChild(this.#bg);
 
 		this.#tileLength = width / this.#columnsLength;
 		this.#rowsLength = Math.floor(height / this.#tileLength);
@@ -46,5 +50,15 @@ export class Board extends Graphics {
 
 			this.addChild(block);
 		}
+	}
+
+	#drawBackground() {
+		this.#bg.setSize({ width: this.#width, height: this.#height });
+
+		this.#bg.rect(0, 0, this.#width, this.#height).fill(0xededed).stroke({
+			color: 0x303030,
+			width: 2,
+			alignment: 0,
+		});
 	}
 }
