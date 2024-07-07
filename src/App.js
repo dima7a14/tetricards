@@ -23,6 +23,9 @@ export async function createApplication(root) {
 		resolution: window.devicePixelRatio || 1,
 	});
 
+	app.stage.eventMode = 'static';
+	app.stage.hitArea = app.screen;
+
 	root.appendChild(app.canvas);
 
 	const cards = new Cards({
